@@ -1,37 +1,149 @@
-## Welcome to GitHub Pages
+<!DOCTYPE html>
+<html>
 
-You can use the [editor on GitHub](https://github.com/katerspotaters/assessment/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Buy My Stuff!</title>
+    <script src="https://checkout-sandbox.getbread.com/bread.js" data-api-key="7101ea30-8ae3-47ab-a8bd-235860d36f3e"></script>
+    <meta charset="utf-8">
+    <title>Flask Skeleton{% block title %}{% endblock %}</title>
+    <!-- meta -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <!-- styles -->
+    <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.1/yeti/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="{{url_for('static', filename='main.css')}}" rel="stylesheet" media="screen">
+    {% block css %}{% endblock %}
+  </head>
+  <body>
+    {% include 'header.html' %}
+    <header>
+      <h1 class="page-title">Buy My Stuff!</h1>
+      <p class="page-description">"Buy My Stuff" is a site where you can buy my stuff! You can either pay the full price or choose a financing option underneath the listed price!</p>
+    </header>
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+    <div class="gallery">
+          <figure class="gallery-item">
+            <img class="thumbnail" src="/static/dog.jpg">
+          </figure>
+            <p class="description">Chewed Dog Toy - $100</p>
 
-### Markdown
+      <form id="bread-checkout-form" action="/confirm" method="POST">
+          <div id="bread-checkout-btn" data-bread-default-size="true" style=background: red;></div>
+      </form>
+      <script>
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+          var shippingContact = {
+              firstName: 'Katelyn',
+              lastName: 'Hertel',
+              address:  '546 77th St',
+              address2: '#2',
+              zip:      '11209',
+              phone:    '5514274402',
+              city:     'Brooklyn',
+              state:    'NY',
+            };
 
-```markdown
-Syntax highlighted code block
 
-# Header 1
-## Header 2
-### Header 3
+            var billingContact = {
+              email:      'katelyn.hertel19@gmail.com',
+              firstName: 'Katelyn',
+              lastName: 'Hertel',
+              address:  '546 77th St',
+              address2: '#2',
+              zip:      '11209',
+              phone:    '5514274402',
+              city:     'Brooklyn',
+              state:    'NY',
+            };
 
-- Bulleted
-- List
+            var opts = {
+              customCSS: "#bread-button { display: table; margin: 0 auto; background: #ff0000; -webkit-border-radius: 28; -moz-border-radius: 28; border-radius: 28px; font-family: Arial; color: #ffffff; font-size: 20px; padding: 15px; text-decoration: none !important; line-height: normal;} #bread-button:hover { background: #067899; color: #ffffff; text-decoration: none;}",
+              buttonId: 'bread-checkout-btn',
+              actAsLabel: false,
+              asLowAs: true,
+              items: [{
+                  name:'Chewed Dog Toy',
+                  price:10000,
+                  sku:'TOY23',
+                  imageUrl:'dog.jpg',
+                  detailUrl:'[REPLACEMEWITHAREALURL]',
+                  quantity: 1
+                }],
+              shippingOptions: [
+                {
+                  type: '2-day shipping',
+                  typeId: 'GS_001',
+                  cost: 1350
+                },
+                {
+                  type: 'Overnight',
+                  typeId:'GS_002',
+                  cost:2000
+                }
+              ],
+              shippingContact: shippingContact,
+              billingContact: billingContact
+          };
+              bread.checkout(opts);
+        </script>
+    <br><br>
 
-1. Numbered
-2. List
+    {% include 'footer.html' %}
 
-**Bold** and _Italic_ and `Code` text
+    <!-- scripts -->
+    <script src="//code.jquery.com/jquery-1.11.2.min.js" type="text/javascript"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="{{url_for('static', filename='main.js')}}" type="text/javascript"></script>
+    {% block js %}{% endblock %}
 
-[Link](url) and ![Image](src)
-```
+  </body>
+</html>
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+<style>
 
-### Jekyll Themes
+  #bread-button {
+    background: red;
+  }
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/katerspotaters/assessment/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+  .description {
+    text-align: center;
+    font-size: 35px;
+    font-weight: bold;
+    color: black;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #00cc00;
+  }
 
-### Support or Contact
+  .page-title {
+    font-size: 100px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #00cc00;
+  }
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+  .page-title {
+    text-align: center;
+  }
+
+  .page-description {
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    color: black;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #00cc00;
+  }
+
+  .gallery {
+    display: table;
+    margin: 0 auto;
+  }
+
+  .thumbnail {
+  display: block;
+  margin: 0 auto;
+  height: 490px;
+  width: 460px;
+}
+</style>
